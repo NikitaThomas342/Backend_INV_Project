@@ -13,12 +13,26 @@ http.createServer(function (req, res) {
     var message = ''
     var data
     var status = 200
+    var regid = /\d{1,2}/
+    var regstring = /^[a-zA-z]+$/
+    var regemail = /^([a-zA-z.-_]+)@(\w+)(\.[a-zA-z.]+)$/
+    var regphone = /[0][689]\d{8}/
+    var regprice = /\d{1,9}/
 
     switch(request_path.pathname) {
         //Show 1 customer
         case '/customer_info': 
             try {
-                data = customerinfo(request_path.query.customer_id)
+
+                let customer_id = request_path.query.customer_id
+
+                if(regid.test(customer_id)){
+                    data = customerinfo(customer_id)
+                }else{
+                    message = 'Incorrect Input'
+                    status = 422
+                }
+
             } catch(err) {
                 message += err
                 status = 204
@@ -38,7 +52,16 @@ http.createServer(function (req, res) {
         //Show 1 food
         case '/food_info':
             try {
-                data = foodinfo(request_path.query.food_id)
+
+                let food_id = request_path.query.food_id
+
+                if(regid.test(food_id)){
+                    data = foodinfo(food_id)
+                }else{
+                    message = 'Incorrect Input'
+                    status = 422
+                }
+
             } catch(err) {
                 message += err
                 status = 204
@@ -58,7 +81,17 @@ http.createServer(function (req, res) {
         //Add new food to foodlist
         case '/add_food_DB': 
             try {
-                data = addfoodDB(request_path.query.food_name,request_path.query.food_price)
+
+                let food_name = request_path.query.food_name
+                let food_price = request_path.query.food_price
+
+                if(regstring.test(food_name)&&regprice.test(food_price)){
+                    data = addfoodDB(food_name,food_price)
+                }else{
+                    message = 'Incorrect Input'
+                    status = 422
+                }
+                
             } catch(err) {
                 message += err
                 status = 204
@@ -68,7 +101,19 @@ http.createServer(function (req, res) {
         //Add new customer
         case '/add_customer_DB':
             try{
-                data = addcustomerDB(request_path.query.firstname,request_path.query.lastname,request_path.query.email,request_path.query.phone)
+
+                let firstname = request_path.query.firstname
+                let lastname = request_path.query.lastname
+                let email = request_path.query.email
+                let phone = request_path.query.phone
+
+                if(regstring.test(firstname)&&regstring.test(lastname)&&regemail.test(email)&&regphone.test(phone)){
+                    data = addcustomerDB(firstname,lastname,email,phone)
+                }else{
+                    message = 'Incorrect Input'
+                    status = 422
+                }
+                
             } catch(err){
                 message += err
                 status = 204
@@ -78,7 +123,18 @@ http.createServer(function (req, res) {
         //Add food to menu
         case '/add_Menu':
             try{
-                data = addMenu()
+
+                let menu_id = request_path.query.menu_id
+                let food_id = request_path.query.food_id
+                let qty = request_path.query.qty
+
+                if(regid.test(menu_id)&&regid.test(food_id)&&regprice.test(qty)){
+                    data = addMenu(menu_id,food_id,qty)
+                }else{
+                    message = 'Incorrect Input'
+                    status = 422
+                }
+                
             } catch(err){
                 message += err
                 status = 204
@@ -88,7 +144,17 @@ http.createServer(function (req, res) {
         //Order added menu
         case '/order_Menu':
             try{
-                data = orderMenu()
+
+                let customer_id = request_path.query.customer_id
+                let menu_id = request_path.query.menu_id
+
+                if(regid.test(customer_id)&&regid.test(menu_id)){
+                    data = orderMenu(customer_id,menu_id)
+                }else{
+                    message = 'Incorrect Input'
+                    status = 422
+                }
+                
             } catch(err){
                 message += err
                 status = 204
@@ -98,7 +164,18 @@ http.createServer(function (req, res) {
         //Order 1 food
         case '/order_food':
             try{
-                data = orderFood(request_path.query.customer_id,request_path.query.food_id,request_path.query.qty)
+
+                let customer_id = request_path.query.customer_id
+                let food_id = request_path.query.food_id
+                let qty = request_path.query.qty
+
+                if(regid.test(customer_id)&&regid.test(food_id)&&regprice.test(qty)){
+                    data = orderFood(customer_id,food_id,qty)
+                }else{
+                    message = 'Incorrect Input'
+                    status = 422
+                }
+                
             } catch(err){
                 message += err
                 status = 204
@@ -108,7 +185,16 @@ http.createServer(function (req, res) {
         //Check Order Status
         case '/order_status':
             try{
-                data = orderStatus(request_path.query.order_id)
+
+                let order_id = request_path.query.order_id
+
+                if(regid.test(order_id)){
+                    data = orderStatus(order_id)
+                }else{
+                    message = 'Incorrect Input'
+                    status = 422
+                }
+                
             } catch(err){
                 message += err
                 status = 204
@@ -118,7 +204,16 @@ http.createServer(function (req, res) {
         //Pay for order
         case '/pay_order':
             try{
-                data = payfororder(request_path.query.order_id)
+
+                let order_id = request_path.query.order_id
+
+                if(regid.test(order_id)){
+                    data = payfororder(order_id)
+                }else{
+                    message = 'Incorrect Input'
+                    status = 422
+                }
+
             } catch(err){
                 message += err
                 status = 204
@@ -128,7 +223,16 @@ http.createServer(function (req, res) {
         //Show 1 order
         case '/order_info':
             try{
-                data = orderinfo(request_path.query.order_id)
+
+                let order_id = request_path.query.order_id
+
+                if(regid.test(order_id)){
+                    data = orderinfo(order_id)
+                }else{
+                    message = 'Incorrect Input'
+                    status = 422
+                }
+
             } catch(err){
                 message += err
                 status = 204
@@ -148,7 +252,16 @@ http.createServer(function (req, res) {
         //Show 1 Menu info
         case '/menu_info':
             try{
-                data = menuinfo(request_path.query.menu_id)
+                
+                let menu_id = request_path.query.menu_id
+
+                if(regid.test(menu_id)){
+                    data = menuinfo(menu_id)
+                }else{
+                    message = 'Incorrect Input'
+                    status = 422
+                }
+                
             } catch(err){
                 message += err
                 status = 204
