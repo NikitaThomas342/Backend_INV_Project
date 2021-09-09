@@ -21,7 +21,7 @@ http.createServer(function (req, res) {
                 data = customerinfo(request_path.query.customer_id)
             } catch(err) {
                 message += err
-                status = 200
+                status = 204
                 console.log(err)
             }
             break
@@ -31,7 +31,7 @@ http.createServer(function (req, res) {
                 data = customerslist()
             } catch(err) {
                 message += err
-                status = 200
+                status = 204
                 console.log(err)
             }
             break
@@ -41,7 +41,7 @@ http.createServer(function (req, res) {
                 data = foodinfo(request_path.query.food_id)
             } catch(err) {
                 message += err
-                status = 200
+                status = 204
                 console.log(err)
             }
             break
@@ -51,7 +51,7 @@ http.createServer(function (req, res) {
                 data = foodlist()
             } catch(err) {
                 message += err
-                status = 200
+                status = 204
                 console.log(err)
             }
             break
@@ -61,7 +61,7 @@ http.createServer(function (req, res) {
                 data = addfoodDB(request_path.query.food_name,request_path.query.food_price)
             } catch(err) {
                 message += err
-                status = 200
+                status = 204
                 console.log(err)
             }
             break
@@ -71,7 +71,7 @@ http.createServer(function (req, res) {
                 data = addcustomerDB(request_path.query.firstname,request_path.query.lastname,request_path.query.email,request_path.query.phone)
             } catch(err){
                 message += err
-                status = 200
+                status = 204
                 console.log(err)
             }
             break
@@ -81,7 +81,7 @@ http.createServer(function (req, res) {
                 data = addMenu()
             } catch(err){
                 message += err
-                status = 200
+                status = 204
                 console.log(err)
             }
             break
@@ -91,7 +91,7 @@ http.createServer(function (req, res) {
                 data = orderMenu()
             } catch(err){
                 message += err
-                status = 200
+                status = 204
                 console.log(err)
             }
             break
@@ -101,7 +101,7 @@ http.createServer(function (req, res) {
                 data = orderFood(request_path.query.customer_id,request_path.query.food_id,request_path.query.qty)
             } catch(err){
                 message += err
-                status = 200
+                status = 204
                 console.log(err)
             }
             break
@@ -111,7 +111,7 @@ http.createServer(function (req, res) {
                 data = orderStatus(request_path.query.order_id)
             } catch(err){
                 message += err
-                status = 200
+                status = 204
                 console.log(err)
             }
             break
@@ -121,7 +121,7 @@ http.createServer(function (req, res) {
                 data = payfororder(request_path.query.order_id)
             } catch(err){
                 message += err
-                status = 200
+                status = 204
                 console.log(err)
             }
             break
@@ -131,7 +131,7 @@ http.createServer(function (req, res) {
                 data = orderinfo(request_path.query.order_id)
             } catch(err){
                 message += err
-                status = 200
+                status = 204
                 console.log(err)
             }
             break
@@ -141,7 +141,7 @@ http.createServer(function (req, res) {
                 data = orderlist()
             } catch(err){
                 message += err
-                status = 200
+                status = 204
                 console.log(err)
             }
             break
@@ -151,7 +151,7 @@ http.createServer(function (req, res) {
                 data = menuinfo(request_path.query.menu_id)
             } catch(err){
                 message += err
-                status = 200
+                status = 204
                 console.log(err)
             }
             break
@@ -161,7 +161,7 @@ http.createServer(function (req, res) {
                 data = menulist()
             } catch(err){
                 message += err
-                status = 200
+                status = 204
                 console.log(err)
             }
             break
